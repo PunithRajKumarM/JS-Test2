@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.0/dist/chartjs-chart-treemap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <title>Document</title>
+    <style>
+      * {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .black {
+        color: black;
+      }
+      .dateCalc,
+      .location,
+      #charts {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        text-align: center;
+        gap: 1rem;
+      }
+      .location {
+        padding: 2rem 0;
+      }
+      .dateCalc,
+      #charts {
+        border: 1px solid black;
+        padding: 1rem;
+      }
+      .hidden {
+        display: none;
+      }
+      #dateResult {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Date calculation -->
+    <div class="dateCalc">
+      <h1>Calculate day</h1>
+      <label for="date1">
+        Date:
+        <input type="date" id="date1" value="" />
+      </label>
+      <label for="date2">
+        Date:
+        <input type="date" id="date2" value="" />
+      </label>
+      <button id="dateSubmit">Submit</button>
+      <div id="dateResult" class="hidden"></div>
+    </div>
+    <!-- Location -->
+    <div class="location">
+      <h1>Location</h1>
+      <p id="locationResult"></p>
+    </div>
+    <!-- Chartbar, tree -->
+    <div id="charts">
+      <canvas
+        id="barChart"
+        style="width: 100%; height: 200px; max-width: 600px"
+      ></canvas>
+      <canvas
+        id="lineChart"
+        style="width: 100%; height: 200px; max-width: 600px"
+      ></canvas>
+      <canvas
+        id="histogram"
+        style="width: 100%; height: 200px; max-width: 600px"
+      ></canvas>
+      <canvas
+        id="treemap"
+        style="width: 100%; height: 200px; max-width: 600px"
+      ></canvas>
+      <div id="heatmap"></div>
+    </div>
+  </body>
+  <script defer src="./Quest1.js"></script>
+  <script>
+    // Quest 6
+    let locationResult = document.getElementById("locationResult");
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        let latitude = pos.coords.latitude;
+        let longitude = pos.coords.longitude;
+        locationResult.style.color = "blue";
+        locationResult.textContent = `Your location: Latitude ${latitude} and Longitude ${longitude}`;
+      });
+    } else {
+      locationResult.style.color = "red";
+      locationResult.textContent = `Sorry, couldn't able to find your location`;
+    }
+  </script>
+  <!-- extra -->
+  <script defer src="./Quest7.js"></script>
+  <script defer src="./Quest8.js"></script>
+  <script defer src="./Quest10.js"></script>
+  <script defer src="./Quest11.js"></script>
+</html>
