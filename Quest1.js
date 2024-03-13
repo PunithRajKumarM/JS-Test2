@@ -1,3 +1,6 @@
+// Create a function that takes two dates and returns the number of days between the first and second date.
+
+
 function calcDays(date1, date2) {
   const parseDate = (date) => {
     const [year, month, day] = date.split("-").map(Number);
