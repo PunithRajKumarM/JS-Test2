@@ -1,3 +1,5 @@
+// Fetch data from any resource at given interval of time. If interval is given as 10s then data fetch has to happen after every 10s 
+
 const fetchData = () => {
   let res = fetch("https://jsonplaceholder.typicode.com/todos")
     .then((res) => res.json())
