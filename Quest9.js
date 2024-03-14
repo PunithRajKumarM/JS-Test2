@@ -1,3 +1,5 @@
+// Write a function that removes all falsy values (false, null, 0, “”, undefined, and NaN) from an array.
+
 function removeFalsyValue(arr) {
   return arr.filter((e) => {
     if (e) {
