@@ -1,23 +1,25 @@
-function comparePromises(p1, p2) {
-  const racePromises = [p1, p2].map((p, index) =>
-    p.then((value) => ({ index, value }))
-  );
+// Given two promises, create a function to determine whether the second promise is faster than the first. If it is, return true. Otherwise, return false.
+let p1 = new Promise((res, rej) => {
+  if (1 < 10) {
+    setTimeout(() => {
+      res("P1 resolved");
+    }, 3000);
+  }
+});
+let p2 = new Promise((res, rej) => {
+  if (1 < 10) {
+    setTimeout(() => {
+      res("P2 resolved");
+    }, 1000);
+  }
+});
 
-  return Promise.race(racePromises)
-    .then((settled) => {
-      console.log(racePromises);
-      console.log(settled);
-      return settled.index === 1;
-    })
-    .catch((err) => err);
+function anyPromise(p1, p2) {
+  return Promise.any([p1, p2]).then((data) => {
+    return Promise.resolve(p2).then((value) => {
+      return value === data;
+    });
+  });
 }
 
-let promise1 = new Promise((resolve) => {
-  setTimeout(() => resolve("Promise 1"), 1000);
-});
-
-let promise2 = new Promise((resolve) => {
-  setTimeout(() => resolve("Promise 2"), 500);
-});
-
-comparePromises(promise1, promise2).then((res) => console.log(res));
+anyPromise(p1, p2).then((res) => console.log(res));
